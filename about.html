@@ -7,11 +7,11 @@
     <title>About Dr. Manchikalapudi Tirumala Babu | Psychiatrist in Guntur</title>
     <meta
       name="description"
-      content="Learn about Dr. Manchikalapudi Tirumala Babu, Consultant Psychiatrist in Guntur, his clinical approach, and compassionate mental health care at Maruthi Hospital and Diagnostics."
+      content="Dr. Manchikalapudi Tirumala Babu, Neuropsychiatric Consultant in Guntur: qualifications, clinical approach and how consultations run at Maruthi Hospital and Diagnostics."
     />
     <meta name="theme-color" content="#102a44" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://REPLACE-WITH-DOMAIN.example/about.html" />
+    <link rel="canonical" href="https://drtirumalababu.com/about.html" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
@@ -22,18 +22,18 @@
     />
     <meta
       property="og:description"
-      content="Learn more about Dr. Manchikalapudi Tirumala Babu, Consultant Psychiatrist in Guntur, and his patient-centred psychiatric care."
+      content="Learn more about Dr. Manchikalapudi Tirumala Babu, Neuropsychiatric Consultant in Guntur, and his patient-centred psychiatric care."
     />
-    <meta property="og:url" content="https://REPLACE-WITH-DOMAIN.example/about.html" />
+    <meta property="og:url" content="https://drtirumalababu.com/about.html" />
     <meta
       property="og:image"
-      content="https://REPLACE-WITH-DOMAIN.example/assets/img/og-card.jpg"
+      content="https://drtirumalababu.com/assets/img/og-card.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Dr. Manchikalapudi Tirumala Babu, Consultant Psychiatrist in Guntur"
+      content="Dr. Manchikalapudi Tirumala Babu, Neuropsychiatric Consultant in Guntur"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -42,11 +42,11 @@
     />
     <meta
       name="twitter:description"
-      content="Learn about Dr. Manchikalapudi Tirumala Babu, Consultant Psychiatrist in Guntur, and the clinic's patient-centred care model."
+      content="Learn about Dr. Manchikalapudi Tirumala Babu, Neuropsychiatric Consultant in Guntur, and the clinic's patient-centred care model."
     />
     <meta
       name="twitter:image"
-      content="https://REPLACE-WITH-DOMAIN.example/assets/img/og-card.jpg"
+      content="https://drtirumalababu.com/assets/img/og-card.jpg"
     />
 
     <link rel="icon" href="favicon.ico" sizes="any" />
@@ -54,9 +54,8 @@
     <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Self-hosted, subset webfonts (see tools/build_fonts.py). The two Latin
-         faces are preloaded because they paint above the fold; the Telugu face
-         is unicode-range gated and loads on its own. -->
+    <!-- Self-hosted, subset webfonts (see tools/build_fonts.py). Both faces
+         are preloaded because both paint above the fold. -->
     <link
       rel="preload"
       href="assets/fonts/inter-text.woff2"
@@ -84,22 +83,48 @@
         "@graph": [
           {
             "@type": "WebSite",
-            "@id": "https://REPLACE-WITH-DOMAIN.example/#website",
-            "name": "Dr. Tirumala Babu's Psychiatry Clinic",
+            "@id": "https://drtirumalababu.com/#website",
+            "name": "Dr. Tirumala Babu Psychiatry",
             "alternateName": "Compassionate care for a healthier mind and a happier life",
-            "url": "https://REPLACE-WITH-DOMAIN.example/",
+            "url": "https://drtirumalababu.com/",
             "inLanguage": "en-IN",
-            "about": { "@id": "https://REPLACE-WITH-DOMAIN.example/#physician" }
+            "about": {
+              "@id": "https://drtirumalababu.com/#physician"
+            }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://drtirumalababu.com/#organization",
+            "name": "Dr. Tirumala Babu Psychiatry",
+            "url": "https://drtirumalababu.com/",
+            "logo": "https://drtirumalababu.com/assets/img/logo.png",
+            "image": "https://drtirumalababu.com/assets/img/logo.png",
+            "telephone": "+91-89850-14488",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "126-151, Ground Floor, Opp. 10th Lane of Sriram Nagar, M.G. Inner Ring Road, Phase-II, Main Road, Gorantla",
+              "addressLocality": "Guntur",
+              "addressRegion": "Andhra Pradesh",
+              "postalCode": "522034",
+              "addressCountry": "IN"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Guntur"
+            },
+            "sameAs": [
+              "https://www.instagram.com/dr_healing_minds/"
+            ]
           },
           {
             "@type": "Physician",
-            "@id": "https://REPLACE-WITH-DOMAIN.example/#physician",
+            "@id": "https://drtirumalababu.com/#physician",
             "name": "Dr. Manchikalapudi Tirumala Babu",
             "honorificPrefix": "Dr.",
             "jobTitle": "Consultant Psychiatrist",
             "medicalSpecialty": "Psychiatric",
-            "image": "https://REPLACE-WITH-DOMAIN.example/assets/img/doctor-tirumala-babu.jpg",
-            "url": "https://REPLACE-WITH-DOMAIN.example/",
+            "image": "https://drtirumalababu.com/assets/img/doctor-tirumala-babu.jpg",
+            "url": "https://drtirumalababu.com/",
             "telephone": "+91-89850-14488",
             "hasCredential": [
               {
@@ -121,17 +146,23 @@
               "postalCode": "522034",
               "addressCountry": "IN"
             },
-            "worksFor": { "@id": "https://REPLACE-WITH-DOMAIN.example/#clinic" }
+            "worksFor": {
+              "@id": "https://drtirumalababu.com/#clinic"
+            }
           },
           {
             "@type": "MedicalClinic",
-            "@id": "https://REPLACE-WITH-DOMAIN.example/#clinic",
+            "@id": "https://drtirumalababu.com/#clinic",
             "name": "Maruthi Hospital and Diagnostics",
             "description": "Psychiatry consultation, counselling and de-addiction support at Maruthi Hospital and Diagnostics, M.G. Inner Ring Road, Guntur.",
             "medicalSpecialty": "Psychiatric",
-            "url": "https://REPLACE-WITH-DOMAIN.example/",
-            "image": "https://REPLACE-WITH-DOMAIN.example/assets/img/clinic-entrance.jpg",
-            "telephone": ["+91-89850-14488", "+91-89850-14411", "+91-98664-83883"],
+            "url": "https://drtirumalababu.com/",
+            "image": "https://drtirumalababu.com/assets/img/clinic-entrance.jpg",
+            "telephone": [
+              "+91-89850-14488",
+              "+91-89850-14411",
+              "+91-98664-83883"
+            ],
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "126-151, Ground Floor, Opp. 10th Lane of Sriram Nagar, M.G. Inner Ring Road, Phase-II, Main Road, Gorantla",
@@ -140,7 +171,10 @@
               "postalCode": "522034",
               "addressCountry": "IN"
             },
-            "areaServed": { "@type": "City", "name": "Guntur" },
+            "areaServed": {
+              "@type": "City",
+              "name": "Guntur"
+            },
             "geo": {
               "@type": "GeoCoordinates",
               "latitude": 16.3358998,
@@ -162,50 +196,47 @@
                 "closes": "21:00"
               }
             ],
-            "employee": { "@id": "https://REPLACE-WITH-DOMAIN.example/#physician" }
+            "employee": {
+              "@id": "https://drtirumalababu.com/#physician"
+            }
           },
-},
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://drtirumalababu.com/about.html#breadcrumb",
+            "itemListElement": [
               {
-                "@type": "Question",
-                "name": "Are psychiatric consultations confidential?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Consultations are treated as confidential medical information, in line with professional practice and applicable law. If you have questions about what is recorded or shared, you are welcome to ask during the consultation."
-                }
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://drtirumalababu.com/about.html"
               },
               {
-                "@type": "Question",
-                "name": "Does every mental health condition require medication?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "No. Treatment depends on the clinical assessment. Some concerns are managed with counselling, lifestyle and follow-up alone; others are helped by medication, sometimes alongside therapy. The options, and the reasons behind them, are discussed with you before anything is started."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can family members accompany the patient?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. Family members are welcome, and their observations are often useful during an assessment. Part of the consultation may still be conducted with the patient alone, which is normal clinical practice."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How can I book an appointment?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Call the clinic on +91 89850 14488, message the same number on WhatsApp, or send an appointment enquiry through the form on this website. The clinic will confirm a time with you."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Where is the clinic located?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Maruthi Hospital and Diagnostics, 126-151, Ground Floor, Opp. 10th Lane of Sriram Nagar, M.G. Inner Ring Road, Phase-II, Main Road, Gorantla, Guntur 522034, Andhra Pradesh. It is directly opposite Ushodaya Super Market."
-                }
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About Dr. Manchikalapudi Tirumala Babu",
+                "item": "https://drtirumalababu.com/about.html"
               }
             ]
+          },
+          {
+            "@type": "MedicalWebPage",
+            "@id": "https://drtirumalababu.com/about.html#webpage",
+            "url": "https://drtirumalababu.com/about.html",
+            "name": "About Dr. Manchikalapudi Tirumala Babu | Psychiatrist in Guntur",
+            "description": "Dr. Manchikalapudi Tirumala Babu, Neuropsychiatric Consultant in Guntur: qualifications, clinical approach and how consultations run at Maruthi Hospital and Diagnostics.",
+            "inLanguage": "en-IN",
+            "isPartOf": {
+              "@id": "https://drtirumalababu.com/#website"
+            },
+            "about": {
+              "@id": "https://drtirumalababu.com/#physician"
+            },
+            "breadcrumb": {
+              "@id": "https://drtirumalababu.com/about.html#breadcrumb"
+            },
+            "reviewedBy": {
+              "@id": "https://drtirumalababu.com/#physician"
+            }
           }
         ]
       }
@@ -240,6 +271,11 @@
         <symbol id="i-whatsapp" viewBox="0 0 24 24">
           <path d="M20 11.7a8 8 0 0 1-11.9 7L4 20l1.4-4a8 8 0 1 1 14.6-4.3Z" />
           <path d="M9 9.2c.3 1 .8 1.9 1.5 2.6.7.7 1.6 1.2 2.5 1.5l1-1.1 1.9.8v1.3c-.1.5-.6.9-1.2.8A7.8 7.8 0 0 1 8 9.1c0-.6.3-1.1.9-1.2h1.3l.7 1.9Z" />
+        </symbol>
+        <symbol id="i-instagram" viewBox="0 0 24 24">
+          <rect x="3.6" y="3.6" width="16.8" height="16.8" rx="5" />
+          <circle cx="12" cy="12" r="3.9" />
+          <path d="M16.9 7.1h.01" />
         </symbol>
         <symbol id="i-calendar" viewBox="0 0 24 24">
           <rect x="3.5" y="5" width="17" height="15" rx="2.5" />
@@ -364,13 +400,143 @@
             </span>
           </a>
 
+          <!-- nav:start -->
           <ul class="nav__list">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="conditions.html">Conditions</a></li>
+            <li class="nav__has-menu">
+              <a href="services.html" class="nav__top">Services</a>
+              <div class="nav__menu">
+                <div class="shell nav__menu-inner">
+                  <div class="nav__menu-col">
+                    <ul>
+                      <li><a href="psychiatric-consultation-guntur.html">Psychiatric Consultation</a></li>
+                      <li><a href="counselling-guntur.html">Counselling and Support</a></li>
+                      <li><a href="anxiety-treatment-guntur.html">Stress and Anxiety Management</a></li>
+                      <li><a href="depression-treatment-guntur.html">Depression Care</a></li>
+                      <li><a href="ocd-treatment-guntur.html">OCD Care</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col">
+                    <ul>
+                      <li><a href="bipolar-disorder-treatment-guntur.html">Bipolar Disorder Care</a></li>
+                      <li><a href="schizophrenia-treatment-guntur.html">Schizophrenia Care</a></li>
+                      <li><a href="sleep-disorder-treatment-guntur.html">Sleep Disorder Care</a></li>
+                      <li><a href="de-addiction-services-guntur.html">De-addiction Support</a></li>
+                      <li><a href="anger-management-guntur.html">Anger Management</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col nav__menu-col--all">
+                    <a class="nav__menu-all" href="services.html">
+                      All services
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav__has-menu">
+              <a href="conditions.html" class="nav__top">Conditions</a>
+              <div class="nav__menu">
+                <div class="shell nav__menu-inner">
+                  <div class="nav__menu-col">
+                    <p class="nav__menu-head">Mental Health Conditions</p>
+                    <ul>
+                      <li><a href="stress-management-guntur.html">Stress</a></li>
+                      <li><a href="depression-treatment-guntur.html">Depression</a></li>
+                      <li><a href="anxiety-treatment-guntur.html">Anxiety Disorders</a></li>
+                      <li><a href="panic-disorder-treatment-guntur.html">Panic Disorder</a></li>
+                      <li><a href="phobia-treatment-guntur.html">Phobias</a></li>
+                      <li><a href="ocd-treatment-guntur.html">Obsessive-Compulsive Disorder</a></li>
+                      <li><a href="bipolar-disorder-treatment-guntur.html">Bipolar Disorder</a></li>
+                      <li><a href="schizophrenia-treatment-guntur.html">Schizophrenia</a></li>
+                      <li><a href="psychosis-treatment-guntur.html">Psychosis</a></li>
+                      <li><a href="anger-management-guntur.html">Anger Management Concerns</a></li>
+                      <li><a href="mental-wellbeing-guntur.html">Mental Wellbeing</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col">
+                    <p class="nav__menu-head">Neurological &amp; Cognitive Conditions</p>
+                    <ul>
+                      <li><a href="migraine-treatment-guntur.html">Migraine</a></li>
+                      <li><a href="autism-assessment-guntur.html">Autism Spectrum Disorder</a></li>
+                      <li><a href="adhd-treatment-guntur.html">ADHD</a></li>
+                      <li><a href="dementia-care-guntur.html">Dementia</a></li>
+                      <li><a href="sleep-disorder-treatment-guntur.html">Sleep Disorders</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col">
+                    <p class="nav__menu-head">De-addiction &amp; Substance-Related Concerns</p>
+                    <ul>
+                      <li><a href="alcohol-de-addiction-guntur.html">Alcohol Use Disorder</a></li>
+                      <li><a href="tobacco-de-addiction-guntur.html">Tobacco Dependence</a></li>
+                      <li><a href="smartphone-addiction-help-guntur.html">Problematic Smartphone Use</a></li>
+                      <li><a href="substance-use-treatment-guntur.html">Other Substance Use Disorders</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col">
+                    <p class="nav__menu-head">Sexual &amp; Psychosomatic Health</p>
+                    <ul>
+                      <li><a href="sexual-health-consultation-guntur.html">Sexual Health Concerns</a></li>
+                      <li><a href="somatic-symptom-treatment-guntur.html">Somatic Symptom Disorder</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col nav__menu-col--all">
+                    <a class="nav__menu-all" href="conditions.html">
+                      All conditions
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav__has-menu">
+              <a href="therapies.html" class="nav__top">Therapies</a>
+              <div class="nav__menu">
+                <div class="shell nav__menu-inner">
+                  <div class="nav__menu-col">
+                    <ul>
+                      <li><a href="cbt-therapy-guntur.html">Cognitive Behavioural Therapy</a></li>
+                      <li><a href="family-therapy-guntur.html">Family Therapy</a></li>
+                      <li><a href="couple-therapy-guntur.html">Couple Therapy</a></li>
+                      <li><a href="psychoeducation-guntur.html">Psychoeducation</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col">
+                    <ul>
+                      <li><a href="behavioural-therapy-guntur.html">Behavioural Therapy</a></li>
+                      <li><a href="supportive-psychotherapy-guntur.html">Supportive Psychotherapy</a></li>
+                      <li><a href="motivational-interviewing-guntur.html">Motivational Interviewing</a></li>
+                      <li><a href="stress-management-therapy-guntur.html">Stress Management</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col">
+                    <ul>
+                      <li><a href="sleep-therapy-guntur.html">Sleep &amp; Insomnia Therapy</a></li>
+                      <li><a href="social-skills-training-guntur.html">Social Skills Training</a></li>
+                      <li><a href="relapse-prevention-guntur.html">Relapse Prevention</a></li>
+                    </ul>
+                  </div>
+                  <div class="nav__menu-col nav__menu-col--all">
+                    <a class="nav__menu-all" href="therapies.html">
+                      All therapies
+                      <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
             <li><a href="contact.html">Contact</a></li>
+            <li class="nav__social-item">
+              <a class="nav__social" href="https://www.instagram.com/dr_healing_minds/" target="_blank"
+                 rel="noopener me" title="Follow us on Instagram"
+                 aria-label="Follow us on Instagram (opens in a new tab)">
+                <svg class="icon" aria-hidden="true"><use href="#i-instagram" /></svg>
+                <span class="visually-hidden">Follow us on Instagram</span>
+              </a>
+            </li>
           </ul>
+          <!-- nav:end -->
 
           <a class="btn btn--primary btn--sm nav__cta" href="contact.html#appointment">
             <svg class="icon" aria-hidden="true"><use href="#i-calendar" /></svg>
@@ -390,15 +556,86 @@
         </nav>
       </div>
 
+      <!-- navpanel:start -->
       <div class="nav__panel" id="nav-panel" hidden>
         <div class="shell">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Doctor</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="conditions.html">Conditions</a></li>
+            <li>
+              <details class="nav__group">
+                <summary>Services</summary>
+                <ul>
+                  <li><a href="services.html">All services</a></li>
+                  <li><a href="psychiatric-consultation-guntur.html">Psychiatric Consultation</a></li>
+                  <li><a href="counselling-guntur.html">Counselling and Support</a></li>
+                  <li><a href="anxiety-treatment-guntur.html">Stress and Anxiety Management</a></li>
+                  <li><a href="depression-treatment-guntur.html">Depression Care</a></li>
+                  <li><a href="ocd-treatment-guntur.html">OCD Care</a></li>
+                  <li><a href="bipolar-disorder-treatment-guntur.html">Bipolar Disorder Care</a></li>
+                  <li><a href="schizophrenia-treatment-guntur.html">Schizophrenia Care</a></li>
+                  <li><a href="sleep-disorder-treatment-guntur.html">Sleep Disorder Care</a></li>
+                  <li><a href="de-addiction-services-guntur.html">De-addiction Support</a></li>
+                  <li><a href="anger-management-guntur.html">Anger Management</a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details class="nav__group">
+                <summary>Conditions</summary>
+                <ul>
+                  <li><a href="conditions.html">All conditions</a></li>
+                  <li><a href="stress-management-guntur.html">Stress</a></li>
+                  <li><a href="depression-treatment-guntur.html">Depression</a></li>
+                  <li><a href="anxiety-treatment-guntur.html">Anxiety Disorders</a></li>
+                  <li><a href="panic-disorder-treatment-guntur.html">Panic Disorder</a></li>
+                  <li><a href="phobia-treatment-guntur.html">Phobias</a></li>
+                  <li><a href="ocd-treatment-guntur.html">Obsessive-Compulsive Disorder</a></li>
+                  <li><a href="bipolar-disorder-treatment-guntur.html">Bipolar Disorder</a></li>
+                  <li><a href="schizophrenia-treatment-guntur.html">Schizophrenia</a></li>
+                  <li><a href="psychosis-treatment-guntur.html">Psychosis</a></li>
+                  <li><a href="anger-management-guntur.html">Anger Management Concerns</a></li>
+                  <li><a href="mental-wellbeing-guntur.html">Mental Wellbeing</a></li>
+                  <li><a href="migraine-treatment-guntur.html">Migraine</a></li>
+                  <li><a href="autism-assessment-guntur.html">Autism Spectrum Disorder</a></li>
+                  <li><a href="adhd-treatment-guntur.html">ADHD</a></li>
+                  <li><a href="dementia-care-guntur.html">Dementia</a></li>
+                  <li><a href="sleep-disorder-treatment-guntur.html">Sleep Disorders</a></li>
+                  <li><a href="alcohol-de-addiction-guntur.html">Alcohol Use Disorder</a></li>
+                  <li><a href="tobacco-de-addiction-guntur.html">Tobacco Dependence</a></li>
+                  <li><a href="smartphone-addiction-help-guntur.html">Problematic Smartphone Use</a></li>
+                  <li><a href="substance-use-treatment-guntur.html">Other Substance Use Disorders</a></li>
+                  <li><a href="sexual-health-consultation-guntur.html">Sexual Health Concerns</a></li>
+                  <li><a href="somatic-symptom-treatment-guntur.html">Somatic Symptom Disorder</a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details class="nav__group">
+                <summary>Therapies</summary>
+                <ul>
+                  <li><a href="therapies.html">All therapies</a></li>
+                  <li><a href="cbt-therapy-guntur.html">Cognitive Behavioural Therapy</a></li>
+                  <li><a href="family-therapy-guntur.html">Family Therapy</a></li>
+                  <li><a href="couple-therapy-guntur.html">Couple Therapy</a></li>
+                  <li><a href="psychoeducation-guntur.html">Psychoeducation</a></li>
+                  <li><a href="behavioural-therapy-guntur.html">Behavioural Therapy</a></li>
+                  <li><a href="supportive-psychotherapy-guntur.html">Supportive Psychotherapy</a></li>
+                  <li><a href="motivational-interviewing-guntur.html">Motivational Interviewing</a></li>
+                  <li><a href="stress-management-therapy-guntur.html">Stress Management</a></li>
+                  <li><a href="sleep-therapy-guntur.html">Sleep &amp; Insomnia Therapy</a></li>
+                  <li><a href="social-skills-training-guntur.html">Social Skills Training</a></li>
+                  <li><a href="relapse-prevention-guntur.html">Relapse Prevention</a></li>
+                </ul>
+              </details>
+            </li>
             <li><a href="services.html#process">How It Works</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li>
+              <a href="https://www.instagram.com/dr_healing_minds/" target="_blank" rel="noopener me">
+                Follow us on Instagram
+              </a>
+            </li>
           </ul>
           <a class="btn btn--primary" href="contact.html#appointment">
             <svg class="icon" aria-hidden="true"><use href="#i-calendar" /></svg>
@@ -406,6 +643,7 @@
           </a>
         </div>
       </div>
+      <!-- navpanel:end -->
     </header>
 
     <main id="main"><section class="section" id="about" aria-labelledby="about-title">
@@ -451,7 +689,8 @@
 
             <div>
               <p class="eyebrow">About the doctor</p>
-              <h2 id="about-title">Meet Dr. Tirumala Babu</h2>
+              <h1 id="about-title">Meet Dr. Tirumala Babu
+            </h1>
 
               <p class="lede">
                 Dr. Manchikalapudi Tirumala Babu is a Consultant Psychiatrist with an
@@ -501,6 +740,16 @@
                 Practising at <strong>Maruthi Hospital and Diagnostics</strong>, M.G.
                 Inner Ring Road, Phase-II, Guntur — near Ushodaya Super Market.
               </p>
+
+              <a
+                class="btn btn--ghost btn--sm about__social"
+                href="https://www.instagram.com/dr_healing_minds/"
+                target="_blank"
+                rel="noopener me"
+              >
+                <svg class="icon" aria-hidden="true"><use href="#i-instagram" /></svg>
+                Follow us on Instagram
+              </a>
             </div>
           </div>
         </div>
@@ -535,10 +784,18 @@
               M.B.B.S., M.D. (Psychiatry) &mdash; Consultant Psychiatrist<br />
               Maruthi Hospital and Diagnostics, Guntur
             </span>
+
+            <a class="footer__social" href="https://www.instagram.com/dr_healing_minds/" target="_blank" rel="noopener me">
+              <svg class="icon" aria-hidden="true"><use href="#i-instagram" /></svg>
+              <span>
+                Follow us on Instagram
+                <span class="handle">@dr_healing_minds</span>
+              </span>
+            </a>
           </div>
 
           <nav class="footer__col" aria-label="Footer">
-            <h3>Explore</h3>
+            <h2>Explore</h2>
             <ul>
               <li><a href="index.html">Home</a></li>
               <li><a href="about.html">About</a></li>
@@ -549,7 +806,7 @@
           </nav>
 
           <div class="footer__col">
-            <h3>Contact</h3>
+            <h2>Contact</h2>
             <ul>
               <li><a href="tel:+918985014488">+91 89850 14488</a></li>
               <li><a href="tel:+918985014411">+91 89850 14411</a></li>
@@ -559,7 +816,7 @@
           </div>
 
           <div class="footer__col">
-            <h3>Urgent help</h3>
+            <h2>Urgent help</h2>
             <ul>
               <li>Emergency: <a href="tel:112">112</a></li>
               <li>Ambulance: <a href="tel:108">108</a></li>

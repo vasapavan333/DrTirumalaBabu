@@ -29,8 +29,12 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = ["index.html", "privacy.html"]
-PLACEHOLDER = "REPLACE-WITH-DOMAIN.example"
+
+# Every page that ships. Keep this in step with sitemap.xml — the sitemap check
+# below reads from this list, so a page added here and nowhere else will fail
+# the build until it is in the sitemap too.
+PAGES = sorted(p.name for p in ROOT.glob("*.html"))
+PLACEHOLDER = "drtirumalababu.com"
 
 # Copy the clinic must not make. Checked against rendered text only.
 BANNED = [

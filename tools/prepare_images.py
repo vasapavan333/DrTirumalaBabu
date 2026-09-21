@@ -71,6 +71,26 @@ def build_portrait():
     """Cut the doctor out of the poster and neutralise the poster artwork."""
     if PORTRAIT_SOURCE and (SRC / PORTRAIT_SOURCE).exists():
         base = Image.open(SRC / PORTRAIT_SOURCE).convert("RGB")
+        # The file in Images/ is NOT the photo the published portrait was
+        # built from: it is 820x1024, a background-removed cut-out sitting on
+        # a checkerboard, while assets/img/doctor-tirumala-babu.jpg is the
+        # original studio shot on a plain grey backdrop. Running this step
+        # against it produces a hero image of a checkerboard with a black bar
+        # down one side, and PIL crops past the edge without complaining.
+        #
+        # So it refuses rather than silently replacing a good asset. To fix it
+        # properly, put the original studio photograph back in Images/ and
+        # set PORTRAIT_TRIM to suit it. See TODO-CONTENT.md.
+        if PORTRAIT_TRIM and (
+            PORTRAIT_TRIM[2] > base.width or PORTRAIT_TRIM[3] > base.height
+        ):
+            print(
+                f"  ! {PORTRAIT_SOURCE} is {base.width}x{base.height}, smaller "
+                f"than PORTRAIT_TRIM {PORTRAIT_TRIM} — the portrait is NOT "
+                "rebuilt and the existing one is kept. See the comment in "
+                "build_portrait()."
+            )
+            return None
         if PORTRAIT_TRIM:
             base = base.crop(PORTRAIT_TRIM)
         # A touch of contrast and warmth so the studio grey sits with the
@@ -243,13 +263,52 @@ def build_og_card(square):
     print("  og-card.jpg  1200x630")
 
 
+# --------------------------------------------------------------------------
+# Gallery images for the homepage band.
+#
+# Two of the three are illustrative rather than photographs of this clinic —
+# they carry a generative watermark — and the page says so. The third is a
+# real clinic photograph, and at 478px it is the smallest source on the site:
+# it is not upscaled here, because upscaling a photograph invents detail that
+# was never in it. A higher-resolution original would improve it.
+# --------------------------------------------------------------------------
+
+GALLERY = [
+    # (source, output stem, target width, target height)
+    ("room-illustrative.jpg", "clinic-room", 900, 675),
+    ("consultation-illustrative.jpg", "consultation-illustrative", 900, 675),
+    ("consultation-clinic.jpg", "consultation-clinic", 478, 358),
+]
+
+
+def build_gallery():
+    for source, stem, width, height in GALLERY:
+        path = SRC / source
+        if not path.exists():
+            print(f"  ! missing {source}, skipped")
+            continue
+        img = Image.open(path).convert("RGB")
+        if img.width < width:
+            # Never upscale: match the source instead and let CSS size it.
+            height = round(height * img.width / width)
+            width = img.width
+        _save_pair(_cover(img, width, height), stem, quality=80)
+
+
 if __name__ == "__main__":
     print("portrait:")
     square = build_portrait()
+    if square is None:
+        # Icons and the share card are cut from the square portrait. Reuse the
+        # one already published rather than skipping them.
+        square = Image.open(OUT / "doctor-tirumala-babu-square.jpg").convert("RGB")
+        print("  using the existing doctor-tirumala-babu-square.jpg")
     print("clinic photos:")
     build_clinic_photos()
     print("icons:")
     build_icons(square)
+    print("gallery:")
+    build_gallery()
     print("share card:")
     build_og_card(square)
     print("done")

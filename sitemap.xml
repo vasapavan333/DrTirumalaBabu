@@ -1,40 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Replace REPLACE-WITH-DOMAIN.example with the production domain before launch. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/</loc>
+    <loc>https://drtirumalababu.com/</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/about.html</loc>
+    <loc>https://drtirumalababu.com/about.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/services.html</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/services.html</loc>
-    <lastmod>2026-09-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/conditions.html</loc>
+    <loc>https://drtirumalababu.com/conditions.html</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/contact.html</loc>
+    <loc>https://drtirumalababu.com/therapies.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/contact.html</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-DOMAIN.example/privacy.html</loc>
+    <loc>https://drtirumalababu.com/privacy.html</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/psychiatric-consultation-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/counselling-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/de-addiction-services-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/stress-management-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/depression-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/anxiety-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/panic-disorder-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/phobia-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/ocd-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/bipolar-disorder-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/schizophrenia-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/psychosis-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/anger-management-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/mental-wellbeing-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/migraine-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/autism-assessment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/adhd-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/dementia-care-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/sleep-disorder-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/alcohol-de-addiction-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/tobacco-de-addiction-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/smartphone-addiction-help-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/substance-use-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/sexual-health-consultation-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/somatic-symptom-treatment-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/cbt-therapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/family-therapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/couple-therapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/psychoeducation-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/behavioural-therapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/supportive-psychotherapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/motivational-interviewing-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/stress-management-therapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/sleep-therapy-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/social-skills-training-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drtirumalababu.com/relapse-prevention-guntur.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

@@ -10,21 +10,24 @@ Run `python tools/audit.py` after each change.
 
 ## 1. Domain — blocks launch
 
-`REPLACE-WITH-DOMAIN.example` appears **17 times**. Nothing about canonicals,
-sharing or the sitemap works until it is replaced.
+`drtirumalababu.com` appears across every page. Nothing about
+canonicals, sharing or the sitemap works until it is replaced.
 
 | File | What |
 | --- | --- |
-| `index.html` | canonical, `og:url`, `og:image`, `twitter:image`, and 9 `@id`/`url`/`image` fields inside the JSON-LD block |
-| `privacy.html` | canonical, `og:url`, `og:image` |
-| `sitemap.xml` | both `<loc>` entries |
+| all ten `.html` pages | canonical, `og:url`, `og:image`, `twitter:image`, and the `@id`/`url`/`image` fields inside the JSON-LD block |
+| `sitemap.xml` | every `<loc>` entry |
 | `robots.txt` | the `Sitemap:` line |
+
+The generated pages take the domain from `DOMAIN` at the top of
+`tools/build_pages.py`. Change it there as well, or the next build puts the
+placeholder back.
 
 Fastest way, once the domain is known:
 
 ```bash
-grep -rl 'REPLACE-WITH-DOMAIN.example' . --exclude-dir=tools --exclude-dir=Images \
-  | xargs sed -i 's#https://REPLACE-WITH-DOMAIN.example#https://your-real-domain.in#g'
+grep -rl 'drtirumalababu.com' . --exclude-dir=tools --exclude-dir=Images \
+  | xargs sed -i 's#https://drtirumalababu.com#https://your-real-domain.in#g'
 ```
 
 Then update the `<!-- TODO -->` comments that mention it and re-run the audit —
@@ -181,10 +184,153 @@ Do not add these without real, attributable source material:
 
 ---
 
-## 11. Medical review
+## 11. Medical review — blocks launch
 
-The service descriptions, condition wording and all six FAQ answers are written
-in a cautious, non-diagnostic register, but **they have not been reviewed by the
-doctor.** Have Dr. Tirumala Babu read the Services, Conditions and FAQ sections
-before launch — the FAQ answers are also duplicated inside the `FAQPage`
-JSON-LD in `index.html`, so any edit needs to be made in both places.
+**This is the largest remaining risk on the site.** There are now 43 pages, 36
+of them generated from copy written for this project, and **none of it has been
+read by Dr. Tirumala Babu.** It covers 22 conditions, 11 therapies and 3
+services, in a deliberately cautious, non-diagnostic register — but a register
+is not a review.
+
+| Needs reading | Where the copy lives |
+| --- | --- |
+| Depression, anxiety, alcohol use — full ten-section pages | `tools/content_detail.py` |
+| The other 19 conditions — five-section pages | `tools/content_short.py` |
+| 11 therapy pages | `tools/content_therapy.py` |
+| Consultation, counselling, de-addiction service pages | `tools/content_service.py` |
+| Condition cards, therapy summaries, Telugu subtitles, the five general FAQs | `tools/content_pages.py` |
+| Services, About, Contact copy | the `.html` files directly |
+
+Edit the Python, then run `python tools/build_pages.py` — that regenerates the
+HTML and the `FAQPage` JSON-LD from the same source, so the visible answer and
+the structured data can no longer disagree.
+
+Specific points to put to the doctor:
+
+1. **Which therapies are actually offered.** Only CBT, family therapy and
+   couple therapy are stated as available, because those three appear on the
+   clinic's own poster. The other eight are described as "may be recommended
+   or referred". Move any of them by flipping `offered=` in `THERAPIES`.
+2. **The urgent-care callouts.** Bipolar disorder, schizophrenia, psychosis,
+   substance use, anger management, migraine and alcohol use carry a red-flag
+   callout. The migraine one tells the reader to seek emergency care for a
+   sudden severe headache; the alcohol and substance ones warn that abrupt
+   cessation can be dangerous. That wording is deliberately strong and should
+   be confirmed.
+3. **Scope.** Migraine, autism, ADHD and dementia pages describe assessment and
+   management at this clinic. Confirm each is genuinely within scope, and that
+   the referral wording matches what actually happens.
+4. **The "what it does not do" section on every therapy page.** It states
+   limitations plainly, which is unusual for a clinic website. Confirm the
+   doctor is comfortable with it.
+
+---
+
+## 12. Adding or deepening a page
+
+Every condition, therapy and the three distinct services now have a page. To
+**deepen** a condition from the five-section template to the ten-section one,
+move its entry from `tools/content_short.py` to `tools/content_detail.py` in
+the fuller shape and rebuild — `content_detail.py` wins where a slug is in
+both. To **add** something new, give it a slug in `content_pages.py` and copy
+in the matching content file; until the copy exists, no page is built and
+nothing links to it.
+
+---
+
+## 14. The portrait source does not match the published portrait — blocks image rebuilds
+
+`Images/DoctorProfile.jpg` in the repository is **not** the photo the hero
+portrait was built from. The file there is 820x1024, a background-removed
+cut-out sitting on a grey-and-white checkerboard. The published
+`assets/img/doctor-tirumala-babu.jpg` is the original studio photograph on a
+plain grey backdrop, and `PORTRAIT_TRIM` in `tools/prepare_images.py` is set
+for a 1318x1102 source that is no longer present.
+
+Running `python tools/prepare_images.py` therefore used to replace a good hero
+image with a checkerboard and a black bar down one side, silently — PIL crops
+past the edge of an image without complaining. That is how it was found.
+
+`prepare_images.py` now checks the source size, refuses the portrait step,
+keeps the existing file and carries on with the rest. So nothing is broken
+today, but **the portrait cannot be rebuilt until the original photograph is
+put back**:
+
+1. Put the original studio photo back in `Images/DoctorProfile.jpg`.
+2. Set `PORTRAIT_TRIM` to match its dimensions.
+3. Run `python tools/prepare_images.py` and check the hero on the homepage.
+
+Until then, do not delete `assets/img/doctor-tirumala-babu*.jpg|webp` — they
+cannot be regenerated.
+
+---
+
+## 15. Photographs on the homepage
+
+The "Inside the clinic" band carries three images. The page used to say which
+were illustrative; that line was removed at the client's request in September
+2026, so nothing on the page now distinguishes them:
+
+| Image | What it is |
+| --- | --- |
+| `clinic-room` | Illustrative. Carries a generative watermark; not this clinic. |
+| `consultation-illustrative` | Illustrative. Also watermarked, and the person resembles the doctor in a consultation that did not take place. |
+| `consultation-clinic` | A real photograph taken at the clinic. |
+
+Three things to settle before launch:
+
+1. **Patient consent.** The real photograph shows a patient with her face
+   blurred, and the page no longer states that consent was given. Confirm the
+   consent is written and on file regardless — blurring is not consent, and
+   context (clinic, clothing, date) can still identify someone. Removing the
+   caption removed the claim, not the obligation.
+2. **The second image shows someone who resembles the doctor** in a
+   consultation that did not take place, and the page presents it alongside a
+   genuine clinic photograph without distinguishing them. Three real photos of
+   the clinic are already built and unused —
+   `assets/img/clinic-entrance`, `clinic-reception` and `clinic-lab`. Swapping
+   one of those in would remove the issue entirely and show the actual
+   practice.
+3. **Resolution.** That photograph is 478px wide, the smallest source on the
+   site. It is not upscaled, because upscaling invents detail. A
+   higher-resolution original would visibly improve it, particularly on a
+   phone screen.
+
+If the clinic would rather not use illustrative images at all, delete the
+first two `<figure>` blocks from the band in `index.html` and drop their
+entries from `GALLERY` in `tools/prepare_images.py`.
+
+---
+
+## 16. Telugu — removed
+
+The site was bilingual in two ways and is now English only:
+
+- Telugu subtitles under every service, condition and therapy name, taken from
+  the clinic's own posters. Present since the first build.
+- A Telugu layer over the navigation, section headings, footer headings, the
+  emergency numbers and the appointment line, added in September 2026.
+
+Both were removed at the client's request on 21 September 2026, along with
+`tools/content_te.py`, the `.te` styles, the `--font-te` token and the
+Noto Sans Telugu webfont. The font build now ships two faces rather than
+three, and the subset dropped from 69.9 KB to 57.0 KB.
+
+If Telugu is wanted again, the poster wording is still in
+`Images/poster-services-telugu.jpg` and the git history has the removed files
+— see the commit that removed them. Restore the face in
+`tools/build_fonts.py` at the same time, or every Telugu character renders as
+an empty box and the audit will not catch it.
+
+---
+
+---
+
+## 13. Professional title
+
+Marketing copy now reads **Neuropsychiatric Consultant** (hero label, meta and
+Open Graph descriptions, portrait alt text). The schema `jobTitle` and the
+"M.B.B.S., M.D. (Psychiatry) — Consultant Psychiatrist" credential lines still
+read **Consultant Psychiatrist**, deliberately: that is the registered
+qualification, and it is what a search engine or a directory verifies against.
+Confirm with the doctor that he is content with both appearing.

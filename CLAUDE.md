@@ -1,13 +1,53 @@
 # Working in this repo
 
-Single-page website for a psychiatrist's practice. Plain HTML/CSS/JS — hand
-written, no generator, no build step, no npm.
+Website for a psychiatrist's practice. Plain HTML/CSS/JS — no framework, no
+npm, no bundler. 43 pages.
+
+**Two kinds of page, and the difference matters:**
+
+| | Pages | Edit by |
+| --- | --- | --- |
+| Hand-written | `index`, `about`, `services`, `contact`, `privacy` | editing the `.html` directly |
+| Generated | `conditions`, `therapies`, and the 36 detail pages (22 conditions, 11 therapies, 3 services) | editing `tools/content_*.py`, then `python tools/build_pages.py` |
+
+Editing a generated page's HTML by hand works until the next build, and then it
+is gone. `conditions.html` is a hybrid: its `<head>` is hand-written, its
+`<main>` is regenerated.
+
+`tools/build_pages.py` also owns several regions of the hand-written pages, and
+rewrites them on every run:
+
+- the **JSON-LD block** on every page. `base_graph()` reads the site-wide
+  nodes out of `index.html`, so the clinic's address, phone numbers and
+  opening hours have exactly one home: edit them in `index.html` and rebuild.
+- the **primary nav and the mobile panel**, including the three dropdowns.
+- the **services accordion** inside `services.html`.
+
+Those regions are wrapped in `<!-- nav:start -->` / `<!-- nav:end -->` style
+markers. Edit inside a marked region and the next build discards it; edit the
+Python instead.
+
+**A slug does not make a page.** `PAGE_EXISTS` in `build_pages.py` is the set
+of slugs that have copy, and every link decision consults it. Add a slug in
+`content_pages.py` without copy and you get no page and no link to it — which
+is deliberate, so the audit never sees a dead internal link mid-way through
+adding something.
 
 ## Where things live
 
 | Change | File |
 | --- | --- |
-| Any copy, phone number, service, condition, FAQ | `index.html` |
+| Homepage, About, Services, Contact copy | the `.html` file itself |
+| A condition's card, its Telugu subtitle, the category it sits in | `tools/content_pages.py` |
+| A therapy, or whether it is offered at the clinic | `tools/content_pages.py` |
+| Which service links to its own page and which to a condition | `tools/content_pages.py` → `SERVICES` |
+| The long-form copy of a condition page (10 sections) | `tools/content_detail.py` |
+| The short copy of a condition page (5 sections) | `tools/content_short.py` |
+| A therapy page | `tools/content_therapy.py` |
+| A service page | `tools/content_service.py` |
+| The site-wide FAQs (shown on `contact.html`) | `tools/content_pages.py` → `GENERAL_FAQS` |
+| Clinic address, phones, hours, geo — anywhere in schema | `index.html` JSON-LD, then rebuild |
+| Header / footer / sprite used by generated pages | `tools/chrome/*.html` |
 | Colours, type scale, spacing, components | `assets/css/site.css` (tokens in `:root`) |
 | Nav, scroll-spy, reveal, map facade, form | `assets/js/site.js` |
 | Portrait, clinic photos, icons, share card | `tools/prepare_images.py` (sources in `Images/`) |
@@ -15,8 +55,12 @@ written, no generator, no build step, no npm.
 | Clinic mark | `tools/prepare_logo.py` (source `Images/logo-source.png`) |
 | Provisional values and launch blockers | `TODO-CONTENT.md` |
 
-Unlike the Siva Sakthi project, there is **no `content.py` and no generator** —
-`index.html` is the source, edit it directly.
+## After editing content
+
+```bash
+python tools/build_pages.py   # only if you touched tools/content_*.py or chrome/
+python tools/audit.py         # always
+```
 
 ## After any change
 
@@ -32,7 +76,7 @@ sitemap coverage, banned marketing claims, and remaining launch placeholders.
 If images changed: `python tools/prepare_images.py` first. If the logo changed,
 `python tools/prepare_logo.py` before that — the favicons and the share card
 are built from its output.
-If copy gained unusual characters: `python tools/build_fonts.py` too — the
+If copy gained an unusual character: `python tools/build_fonts.py` too — the
 audit will not catch a missing glyph, but a tofu box on the page will.
 
 Preview over http (`preview.cmd`, or `python -m http.server 4181`), never
@@ -52,8 +96,20 @@ rather than filled in:
 - **Unverified facts get labelled, not stated.** The registration number carries
   "As provided by the clinic; pending independent verification" — remove that
   line only once it is actually verified.
-- The FAQ answers exist twice: as visible copy and inside the `FAQPage` JSON-LD.
-  Edit both, or the audit's JSON stays valid while the structured data lies.
+- FAQ answers are written once, in Python, and the build emits both the visible
+  `<details>` copy and the `FAQPage` JSON-LD from that one source. Do not
+  hand-edit either copy in the HTML — they will drift, and a page that says one
+  thing to a reader and another to a search engine is the failure mode this
+  arrangement exists to prevent.
+- **No page may let a reader diagnose themselves.** Every symptom list carries
+  the "this is a description, not a checklist" framing, causes are always
+  contributors rather than *the* cause, screening questionnaires are described
+  as aids to assessment and never as tests, and no page names a medicine or a
+  dose. These rules are restated at the top of `tools/content_pages.py`.
+- **A therapy is only described as offered at the clinic when that is
+  confirmed.** Today that is CBT, family therapy and couple therapy, which
+  appear on the clinic's own poster; everything else says "may be recommended
+  or referred".
 - Emergency numbers (112, 108, Tele-MANAS 14416) are real and load-bearing.
   Verify before changing.
 
@@ -69,8 +125,31 @@ rather than filled in:
   portrait. Every colour, size, radius and shadow is a token in the `:root`
   block — change the token, not the rule. Do not introduce a cool grey
   (`#f5f8fb` and friends); it fights the ivory and the page goes clinical.
+- **The primary nav has three dropdowns**, opened by `:hover` and
+  `:focus-within` and not by a script. The top-level item stays an ordinary
+  link to the full page, which is what a tap does on a touch screen and what a
+  crawler follows. `.nav__menu::before` is an invisible strip bridging the gap
+  between the link and the panel — without it the menu closes before the
+  pointer arrives. The desktop nav starts at **1150px**, not 1100: six items,
+  three carets and the CTA do not fit below that with usable spacing.
+- **Services, conditions and therapies are accordion lists, not card grids.**
+  Each item is a `<details>` row (`.accordion` in section 23 of the CSS) —
+  plain HTML, no JavaScript, so the rows still open if a script fails and
+  find-in-page can expand them. Several may be open at once; do not add a
+  script that closes the others. The `<h3>` lives inside the `<summary>` so a
+  screen reader's heading list still enumerates every item while the rows are
+  closed, and so the condition names stay indexable.
+- **The site is English only.** Telugu subtitles and a Telugu translation layer
+  both existed and were both removed at the client's request in September 2026,
+  along with the Noto Sans Telugu webfont. Do not reintroduce either without
+  asking — and if Telugu ever comes back, `tools/build_fonts.py` needs its face
+  restored too, or every Telugu character renders as an empty box.
 - The Google Map stays a **click-to-load facade**. Do not replace it with an
   always-loaded iframe.
+- **`tools/prepare_images.py` cannot rebuild the hero portrait.** The source
+  in `Images/` is not the photo it was built from, so the step refuses and
+  keeps the published file. Do not delete `assets/img/doctor-tirumala-babu*` —
+  they cannot be regenerated. TODO-CONTENT.md §14 has the fix.
 - Every `<img>` needs `alt`, `width` and `height`. Below-the-fold images need
   `loading="lazy"`; the hero portrait is preloaded and must not be lazy.
 - Scroll reveals are gated on `prefers-reduced-motion` and have a 4-second
@@ -91,10 +170,3 @@ separate entity.
 
 The strapline is "Compassionate care for a healthier mind and a happier life".
 
-## Telugu
-
-Service and condition cards carry Telugu subtitles taken from the clinic's own
-posters (`Images/poster-*.jpg`). Copy the wording from the poster rather than
-translating fresh — the poster's phrasing is what patients in Guntur recognise.
-They render through `--font-te` (Noto Sans Telugu / Nirmala UI), which ships
-with Windows and Android; no webfont is loaded.

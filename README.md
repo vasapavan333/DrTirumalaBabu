@@ -19,7 +19,7 @@ Read **[TODO-CONTENT.md](TODO-CONTENT.md)** first. It lists every value that is
 provisional — the domain placeholder, the registration number, the consulting
 hours, the experience line — with the exact file and constant to change.
 
-The single most important one: replace `REPLACE-WITH-DOMAIN.example` with the
+The single most important one: replace `drtirumalababu.com` with the
 real domain in `index.html`, `privacy.html`, `sitemap.xml` and `robots.txt`.
 `tools/audit.py` counts the remaining occurrences on every run.
 

@@ -45,15 +45,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Noto Sans Telugu";
-  src: url("../fonts/noto-telugu.woff2") format("woff2");
-  font-weight: 400 600;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0C00-0C7F, U+200C-200D;
-}
-
 /* ---------- 2. Tokens ---------------------------------------------------- */
 
 :root {
@@ -75,7 +66,10 @@
   /* Secondary supportive blue tones */
   --clay-700: #0d4a8c;
   --clay-600: #1364bd;
-  --clay-500: #2679d1;
+  /* White text on this sat at 4.43:1 — just under WCAG AA for body-size
+     text, which the "Book on WhatsApp" button uses. Two shades darker and
+     visually the same blue, at 4.88:1. */
+  --clay-500: #2472c7;
   --clay-050: #edf5ff;
 
   /* Soft cool gray accents */
@@ -100,7 +94,6 @@
   /* Type */
   --font-display: "Newsreader", "Georgia", serif;
   --font: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --font-te: "Noto Sans Telugu", "Nirmala UI", Gautami, "Noto Sans", sans-serif;
 
   --fs-xs: 0.78rem;
   --fs-sm: 0.885rem;
@@ -364,14 +357,6 @@ strong {
   margin-inline: auto;
 }
 
-.te {
-  font-family: var(--font-te);
-  font-size: 0.86em;
-  color: var(--muted);
-  display: block;
-  line-height: 1.55;
-}
-
 /* ---------- 5. Buttons & pills ------------------------------------------- */
 
 .btn {
@@ -566,7 +551,7 @@ strong {
 /* On phones the header holds only the lockup and the menu button, so the
    clinic name is allowed to take two lines and the brand may shrink again —
    nowrap at 390px would push the page 13px wider than the screen. */
-@media (max-width: 1099px) {
+@media (max-width: 1149px) {
   .brand {
     flex: 1 1 auto;
     min-width: 0;
@@ -639,6 +624,8 @@ strong {
 /* The strapline is 57 characters, and it must stay on one line or the header
    grows a second row. It only earns its place once there is room for it beside
    the nav; below 1260px the clinic name carries the header on its own. */
+/* The strapline earns its place only once there is room for it beside the
+   nav; below this the clinic name carries the header on its own. */
 @media (min-width: 1260px) {
   .brand__tagline {
     display: block;
@@ -776,7 +763,7 @@ strong {
   width: 100%;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1150px) {
   .nav__list,
   .nav__cta {
     display: flex;
@@ -950,6 +937,35 @@ strong {
   display: block;
   font-size: var(--fs-sm);
   color: var(--muted);
+}
+
+/* The Instagram link at the end of the name chip. margin-left:auto pins it to
+   the right of the pill however long the name runs. 44px square, because it is
+   a tap target on a phone. */
+.hero__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  border-radius: 50%;
+  color: var(--teal-700);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.hero__social .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.hero__social:hover,
+.hero__social:focus-visible {
+  background: var(--teal-100);
+  color: var(--teal-800);
+  transform: translateY(-1px);
 }
 
 /* -- the portrait cutout -- */
@@ -1257,11 +1273,6 @@ strong {
   font-size: 1.22rem;
 }
 
-.card .te {
-  margin-bottom: 0.7rem;
-  font-size: 0.85rem;
-}
-
 .card p {
   font-size: var(--fs-sm);
   color: var(--muted);
@@ -1311,10 +1322,6 @@ strong {
   color: var(--navy-800);
   font-weight: 600;
   line-height: 1.32;
-}
-
-.conditions .te {
-  font-size: 0.85rem;
 }
 
 .callout {
@@ -1465,7 +1472,10 @@ strong {
 
 @media (min-width: 880px) {
   .steps {
-    grid-template-columns: repeat(4, 1fr);
+    /* auto-fit rather than a fixed four, because the diagnosis section on a
+       condition page can have five steps and a fixed grid leaves the fifth
+       stranded alone on a second row. */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.75rem;
   }
   .step {
@@ -1538,6 +1548,7 @@ strong {
   margin-inline: auto;
 }
 
+.cta-band h1,
 .cta-band h2 {
   color: #fff;
   margin-bottom: 0.85rem;
@@ -2056,7 +2067,7 @@ strong {
   }
 }
 
-.footer__col h3 {
+.footer__col h2 {
   font-family: var(--font);
   font-size: 0.68rem;
   letter-spacing: 0.18em;
@@ -2114,7 +2125,7 @@ strong {
   max-width: 140ch;
   margin: 0 auto 1.25rem;
   font-size: var(--fs-xs);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.56);
   line-height: 1.8;
 }
 
@@ -2154,7 +2165,7 @@ strong {
   gap: 0.4rem;
   margin: 0;
   font-size: var(--fs-xs);
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.56);
 }
 
 .footer__credit a {
@@ -2306,4 +2317,722 @@ html:not(.js) .reveal {
 
 .btn-row--spaced {
   margin-top: 2rem;
+}
+
+/* ---------- 21. Condition & therapy pages -------------------------------- */
+
+/* These rules back the pages built by tools/build_pages.py. They are additive
+   — nothing above is changed — and they use only the tokens in :root. */
+
+.btn-row--center {
+  justify-content: center;
+}
+
+/* Running prose in a section that is not a card grid. */
+.prose {
+  max-width: 68ch;
+  color: var(--ink-soft);
+  font-size: var(--fs-md);
+}
+
+.prose p + p {
+  margin-top: 1rem;
+}
+
+/* A card that carries more than one paragraph, or a list. .card p sets
+   margin:0 for the single-paragraph case, so spacing is restored here. */
+.card p + p {
+  margin-top: 0.8rem;
+}
+
+.card--list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.card--list li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.card--list li::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.52rem;
+  border-radius: 50%;
+  background: var(--teal-500);
+}
+
+/* "Read about depression ->" at the foot of a condition card. */
+.card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--teal-700);
+  text-decoration: none;
+  /* Keeps the whole row a comfortable tap target on a phone. */
+  min-height: 44px;
+  align-self: start;
+}
+
+.card__more .icon {
+  width: 1.05em;
+  height: 1.05em;
+  transition: transform 0.25s ease;
+}
+
+.card__more:hover,
+.card__more:focus-visible {
+  color: var(--teal-800);
+  text-decoration: underline;
+}
+
+.card__more:hover .icon {
+  transform: translateX(3px);
+}
+
+/* Availability badge on a therapy card. The distinction matters: only three
+   of these are confirmed as offered at the clinic. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  padding: 0.32rem 0.72rem;
+  border: 1px solid var(--line-cool);
+  border-radius: var(--r-pill);
+  background: var(--sand);
+  color: var(--ink-soft);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tag--offered {
+  background: var(--teal-100);
+  border-color: var(--teal-100);
+  color: var(--teal-800);
+}
+
+/* The cards on these pages stack an icon, a tag, a heading and body copy, so
+   they need to be columns rather than plain blocks. */
+.cards .card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- 22. Header: spacing and dropdown menus ----------------------- */
+
+/* The brand lockup is left exactly as designed: 52px mark, the clinic name on
+   one line, the strapline on one line beneath it from 1260px up. It is the
+   widest thing in the header and it does not give any width back, so all the
+   room for six nav items, three carets and the CTA has to come from the nav
+   itself. */
+
+@media (min-width: 1150px) {
+  .nav {
+    gap: 0.4rem;
+  }
+  .nav__list {
+    gap: 0.1rem;
+  }
+  /* Six items, three carets, the Instagram button and the CTA, beside a brand
+     lockup that is flex:none and gives nothing back. This is what fits. */
+  .nav__list a {
+    padding: 0.55rem 0.42rem;
+  }
+  .nav__list a::after {
+    left: 0.42rem;
+    right: 0.42rem;
+  }
+  .nav__cta {
+    margin-left: 0.1rem;
+  }
+}
+
+/* A caret on the three items that open a menu. Drawn with borders rather than
+   added to the icon sprite — it is two triangles' worth of CSS, and the sprite
+   is shipped inline on every page. */
+.nav__has-menu > .nav__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+.nav__has-menu > .nav__top::before {
+  content: "";
+  order: 2;
+  width: 0;
+  height: 0;
+  border: 3.5px solid transparent;
+  border-top-color: currentColor;
+  margin-top: 2px;
+  opacity: 0.65;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav__has-menu:hover > .nav__top::before,
+.nav__has-menu:focus-within > .nav__top::before {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* The panel spans the header rather than hanging off the list item, so a menu
+   of twenty-two conditions can use the full width without ever overflowing the
+   right-hand edge. .site-header is position:sticky, which makes it the
+   containing block for this. */
+.nav__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+
+/* Opened by hover and by keyboard focus, with no JavaScript involved — so the
+   menus still work if a script fails, and tabbing into one reveals it. */
+.nav__has-menu:hover > .nav__menu,
+.nav__has-menu:focus-within > .nav__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* The link sits about 22px above the bottom of the header, so travelling from
+   the link down into the panel crosses a gap of header. This invisible strip
+   bridges it; without it the menu closes before the pointer arrives. It only
+   exists while the menu is open, so it never blocks anything. */
+.nav__menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 24px;
+}
+
+.nav__menu-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 0.5rem + 2vw, 3rem);
+  padding-block: 1.75rem 2rem;
+}
+
+.nav__menu-col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.nav__menu-col--all {
+  flex: 0 0 auto;
+}
+
+.nav__menu-head {
+  margin: 0 0 0.6rem;
+  padding-inline: 0.55rem;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-700);
+}
+
+.nav__menu-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.nav__menu-col li {
+  margin: 0;
+}
+
+.nav__menu a {
+  display: block;
+  padding: 0.42rem 0.55rem;
+  border-radius: var(--r-sm);
+  font-family: var(--font);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav__menu a:hover,
+.nav__menu a:focus-visible {
+  background: var(--ivory);
+  color: var(--teal-800);
+}
+
+.nav__menu-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--teal-700);
+}
+
+.nav__menu-all .icon {
+  width: 1em;
+  height: 1em;
+  transition: transform 0.2s ease;
+}
+
+.nav__menu-all:hover .icon {
+  transform: translateX(3px);
+}
+
+/* Groups inside the mobile panel. <details> again, for the same reason. */
+.nav__group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 0.25rem;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 500;
+  color: var(--navy-800);
+}
+
+.nav__group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav__group > summary::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top-color: currentColor;
+  margin-top: 3px;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.nav__group[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+.nav__group > ul {
+  margin: 0 0 0.75rem;
+  padding: 0 0 0 0.9rem;
+  border-left: 2px solid var(--line);
+}
+
+.nav__group li {
+  border-bottom: 0;
+}
+
+.nav__group a {
+  padding: 0.55rem 0.25rem;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+/* ---------- 23. Accordion lists ------------------------------------------ */
+
+/* Services, conditions and therapies are long lists of short descriptions.
+   As card grids they made three pages that were mostly scrolling, so each
+   item is a <details> row instead: the name stays visible and the description
+   opens on demand.
+
+   Built on <details>/<summary> deliberately — no JavaScript, so the rows
+   still open if a script fails, and the browser's own find-in-page can
+   expand them. Several may be open at once; opening one does not close the
+   others, so two conditions can be compared side by side. */
+
+.accordion {
+  max-width: 62rem;
+  margin-inline: auto;
+  border-top: 1px solid var(--line);
+}
+
+.accordion details {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  transition: background-color 0.2s ease;
+}
+
+.accordion details[open] {
+  background: linear-gradient(180deg, var(--ivory), transparent 70%);
+}
+
+.accordion summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* 44px of height even with a one-line title, for a comfortable tap. */
+  padding: 1.05rem 0.5rem;
+  min-height: 56px;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s ease;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+/* The icon sits in a tinted disc so the rows read as a list of things rather
+   than a list of sentences. */
+.accordion summary > .icon {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  padding: 9px;
+  border-radius: 50%;
+  background: var(--teal-100);
+  color: var(--teal-800);
+  box-sizing: border-box;
+}
+
+.accordion__title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.accordion__title h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--navy-800);
+  transition: color 0.2s ease;
+}
+
+.accordion summary:hover .accordion__title h3 {
+  color: var(--teal-800);
+}
+
+/* The same plus-into-cross marker the FAQ uses: two 1px bars drawn as
+   background layers, so there is no extra element to keep in sync. */
+.accordion summary::after {
+  content: "";
+  flex: none;
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background-color: var(--surface);
+  background-image: linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-size: 11px 1.5px, 1.5px 11px;
+  background-position: center, center;
+  background-repeat: no-repeat;
+  color: var(--teal-600);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+    border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.accordion summary:hover::after {
+  border-color: var(--brass-400);
+  background-color: var(--ivory);
+}
+
+.accordion details[open] summary::after {
+  transform: rotate(135deg);
+  border-color: var(--brass-400);
+}
+
+.accordion__body {
+  /* Line the copy up with the title, not with the icon. */
+  padding: 0 3rem 1.4rem calc(38px + 1.5rem);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.accordion__body p {
+  margin: 0 0 0.75rem;
+}
+
+.accordion__body p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion__body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.2rem 0 0.75rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.accordion__body li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.accordion__body li::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.55rem;
+  border-radius: 50%;
+  background: var(--teal-500);
+}
+
+.accordion__body .tag {
+  margin-bottom: 0.7rem;
+}
+
+.accordion__body .card__more {
+  margin-top: 0.4rem;
+  min-height: 0;
+}
+
+/* Counts the rows so a collapsed section still says how much is inside. */
+.accordion__meta {
+  max-width: 62rem;
+  margin: 0.9rem auto 0;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  text-align: right;
+}
+
+@media (max-width: 559px) {
+  .accordion summary {
+    gap: 0.75rem;
+    padding-inline: 0.15rem;
+  }
+  .accordion summary > .icon {
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+  }
+  .accordion__body {
+    padding: 0 0.15rem 1.3rem calc(32px + 0.9rem);
+  }
+}
+
+/* Category groups inside a single section. Four separate <section>s each cost
+   a full --pad-section top and bottom plus a section head; grouping them saves
+   roughly 700px of scrolling on the conditions page alone. */
+.cat-group + .cat-group {
+  margin-top: clamp(2.5rem, 1.8rem + 2.2vw, 3.75rem);
+}
+
+.cat-group__head {
+  max-width: 62rem;
+  margin: 0 auto 1.2rem;
+}
+
+.cat-group__head h2 {
+  font-size: var(--fs-xl);
+  margin-bottom: 0.25rem;
+}
+
+.cat-group__head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+/* Chips that jump straight to a category, so the page can be skipped rather
+   than scrolled. */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto 0;
+  max-width: 62rem;
+}
+
+.jump li {
+  margin: 0;
+}
+
+.jump a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid var(--line-cool);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--navy-800);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.jump a:hover,
+.jump a:focus-visible {
+  border-color: var(--teal-500);
+  background: var(--teal-050);
+  color: var(--teal-800);
+}
+
+.jump .count {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+/* A second heading inside one section — used where "what it does not do"
+   follows "who it tends to suit" on a therapy page. */
+.section__head--sub {
+  margin-top: clamp(2.5rem, 1.8rem + 2vw, 3.5rem);
+}
+
+/* The availability badge sits under the lede in a therapy page's hero. */
+.tag-row {
+  margin: 0 0 0.25rem;
+}
+
+/* Safety net: a long label wraps inside its own column rather than pushing
+   into the next one. */
+.nav__menu a {
+  overflow-wrap: break-word;
+}
+
+/* ---------- 24. Gallery --------------------------------------------------- */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(0.9rem, 0.5rem + 1.2vw, 1.5rem);
+}
+
+.gallery figure {
+  margin: 0;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--sand);
+  box-shadow: var(--shadow-sm);
+}
+
+.gallery figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+
+/* ---------- 26. Instagram ------------------------------------------------- */
+
+/* In the header nav. Icon only — the bar has no room for four more words, and
+   six items plus the CTA already fill it — so the label is carried by
+   aria-label, a title tooltip and visually-hidden text a screen reader reads.
+   44px square, because it is a tap target. */
+.nav__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav__social .icon {
+  width: 21px;
+  height: 21px;
+}
+
+.nav__social::after {
+  display: none;
+}
+
+.nav__social:hover,
+.nav__social:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+/* In the footer, under the doctor's details. This is the copy that tells
+   people what the link is, and it is on every page. */
+.footer__social {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+  padding: 0.65rem 0.95rem 0.65rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--r-pill);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.footer__social .icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  margin-top: 1px;
+}
+
+.footer__social .handle {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.footer__social:hover,
+.footer__social:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.footer__social:hover .handle {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* On the About page, under the practice address. */
+.about__social {
+  margin-top: 1.25rem;
 }

@@ -7,20 +7,18 @@
 Sources are the upstream variable fonts, kept in tools/fonts-src/ so the build
 is reproducible without a network call:
 
-    newsreader-latin-wght-normal.woff2       display serif  (headings)
-    inter-latin-wght-normal.woff2            text sans      (body, UI)
-    noto-sans-telugu-telugu-wght-normal.woff2  Telugu subtitles
+    newsreader-latin-wght-normal.woff2  display serif  (headings)
+    inter-latin-wght-normal.woff2       text sans      (body, UI)
 
 Outputs go to assets/fonts/ as .woff2, and the script prints the before/after
 size of each so a regression is obvious.
 
-Why subset: the Telugu face ships ~121 KB of glyphs for a language whose use on
-this site is a couple of dozen short phrases. Cutting it to the characters
-actually present, and pinning its weight axis, roughly quarters it. The Latin
-faces lose the accented ranges the copy never uses, halving each.
+Why subset: each face ships the whole Latin range including accented
+characters the copy never uses. Cutting it to the characters actually present
+roughly halves each file.
 
-Re-run this after adding copy in a new script or an unusual character — the
-audit will not catch a missing glyph, but a tofu box on the page will.
+Re-run this after adding copy with an unusual character — the audit will not
+catch a missing glyph, but a tofu box on the page will.
 """
 
 from __future__ import annotations
@@ -32,7 +30,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = Path(__file__).resolve().parent / "fonts-src"
 OUT = ROOT / "assets" / "fonts"
-PAGES = ["index.html", "privacy.html"]
+# Every page that ships. A glyph missing from the subset shows as a tofu box
+# that the audit cannot see, so the whole site is scanned rather than a sample.
+PAGES = sorted(p.name for p in ROOT.glob("*.html"))
 
 # Always keep these, whether or not they appear in today's copy: the digits and
 # punctuation any future edit will reach for, plus the typographic characters
@@ -51,12 +51,10 @@ ALWAYS = (
 
 FONTS = [
     # (source file, output stem, characters it needs, weight to pin)
-    # pin=None keeps the variable weight axis; the Latin faces need it because
-    # the design uses several weights. The Telugu face is only ever drawn at one
-    # weight, so pinning it drops the variation tables.
+    # pin=None keeps the variable weight axis, which both faces need because
+    # the design uses several weights.
     ("newsreader-latin-wght-normal.woff2", "newsreader-display", "latin", None),
     ("inter-latin-wght-normal.woff2", "inter-text", "latin", None),
-    ("noto-sans-telugu-telugu-wght-normal.woff2", "noto-telugu", "telugu", 500),
 ]
 
 
@@ -77,10 +75,6 @@ def page_text() -> str:
     return " ".join(out)
 
 
-def is_telugu(ch: str) -> bool:
-    return "ఀ" <= ch <= "౿"
-
-
 def main() -> int:
     try:
         from fontTools import subset  # noqa: F401
@@ -92,13 +86,10 @@ def main() -> int:
     text = page_text()
     used = set(text)
 
-    latin = sorted({c for c in used if c.isprintable() and not is_telugu(c) and ord(c) < 0x2200})
+    latin = sorted({c for c in used if c.isprintable() and ord(c) < 0x2200})
     latin = sorted(set(latin) | set(ALWAYS))
-    telugu = sorted({c for c in used if is_telugu(c)} | {"‌", "‍"})
 
-    print(f"latin glyphs: {len(latin)}   telugu glyphs: {len(telugu)}")
-    if not telugu:
-        print("  ! no Telugu found in the pages — the Telugu font will be skipped")
+    print(f"latin glyphs: {len(latin)}")
 
     total_before = total_after = 0
     for source, stem, which, pin in FONTS:
@@ -106,9 +97,7 @@ def main() -> int:
         if not src.exists():
             print(f"  ! missing source {source} — see the docstring")
             continue
-        chars = latin if which == "latin" else telugu
-        if not chars:
-            continue
+        chars = latin
 
         subset_input = src
         tmp = None
